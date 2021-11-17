@@ -33,7 +33,7 @@ script:
     source build/envsetup.sh
     # Choose build flavor as "eng" or "userdebug"
     BUILD_FLAVOR="eng"
-    lunch omni_$$DEVICE$$-${BUILD_FLAVOR}
+    lunch omni_Stratus_c5_${BUILD_FLAVOR}
     make -j$(nproc --all) recoveryimage
     exit
     EOF
