@@ -33,7 +33,7 @@ script:
     source build/envsetup.sh
     # Choose build flavor as "eng" or "userdebug"
     BUILD_FLAVOR="eng"
-    lunch platform_manifest_twrp_aosp ${BUILD_FLAVOR}
+    lunch omni_stratus_c5-eng
     make -j$(nproc --all) recoveryimage
     exit
     EOF
