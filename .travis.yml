@@ -18,7 +18,7 @@ before_script:
   # Uncomment & Use below line If Building for Lollipop-based Devices
   # - TWRP_SOURCE="https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.3.1-20200222/MinimalOmniRecovery-twrp-5.1-norepo-20200222.tar.xz"
   # Use below line If Building for Marshmallow-based Devices
-  - TWRP_SOURCE="https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.3.1-20200222/MinimalOmniRecovery-twrp-6.0-norepo-20200222.tar.xz"
+  - TWRP_SOURCE="https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git"
   # Uncomment & Use below line If Building for Nougat-based Devices
   # - TWRP_SOURCE="https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.3.1-20200222/MinimalOmniRecovery-twrp-7.1-norepo-20200222.tar.xz"
   - wget -q ${TWRP_SOURCE} -O $HOME/twrp.tar.xz
@@ -33,16 +33,16 @@ script:
     source build/envsetup.sh
     # Choose build flavor as "eng" or "userdebug"
     BUILD_FLAVOR="eng"
-    lunch omni_Stratus_c5${BUILD_FLAVOR}
+    lunch platform_manifest_twrp_aosp ${BUILD_FLAVOR}
     make -j$(nproc --all) recoveryimage
     exit
     EOF
 after_success:
   - export version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
-  - cp $HOME/twrp/out/target/product/$$DEVICE$$/recovery.img $HOME/twrp/TWRP-$version-$$DEVICE$$-$(date +"%Y%m%d")-Unofficial.img
+  - cp $HOME/twrp/out/target/product/Stratus_C5/recovery.img $HOME/twrp/TWRP-10-Stratus_C5-$(date +"%Y%m%d")-Unofficial.img
   - cd $HOME/twrp/
   # Optional: You might need to switch from https://transfer.sh to https://file.io
-  # - curl -s --upload-file TWRP-$version-$$DEVICE$$-$(date +"%Y%m%d")-Unofficial.img https://transfer.sh/ && echo ""
+  # - curl -s --upload-file TWRP-$version-Stratus_C5-$(date +"%Y%m%d")-Unofficial.img https://file.io/ && echo ""
 deploy:
   skip_cleanup: true
   provider: releases
